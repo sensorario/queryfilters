@@ -52,3 +52,14 @@ test('add rel with embedded filter', () => {
         'rel=foo&filtering[_embedded.foo.bar]=666'
     );
 });
+
+test('add rel with embedded filter even if have more levels', () => {
+    var queryQl = new QueryQl()
+    queryQl.applyFilter({
+        field: '_embedded.foo.bar.field',
+        value: 666
+    });
+    expect(queryQl.getQueryString()).toEqual(
+        'rel=foo,bar&filtering[_embedded.foo.bar.field]=666'
+    );
+});

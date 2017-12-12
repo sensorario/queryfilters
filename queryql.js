@@ -25,8 +25,10 @@ function QueryQl() {
         for (f in this.filters) {
             var filter = this.filters[f];
             if (this.containsRelations(filter)) {
-                filterRelation = filter.field.split('.')[relation];
-                qs += 'rel=' + filterRelation;
+                splitted = filter.field.split('.')
+                splitted.pop(); // remove the last
+                splitted.shift(); // remove the first
+                qs += 'rel=' + splitted.join(); 
             }
 
             if (qs != '') {

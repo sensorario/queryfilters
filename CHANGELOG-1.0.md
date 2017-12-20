@@ -2,3 +2,4 @@
 
  - add all relations from each filter
  - change operator combination
+ - add readme file

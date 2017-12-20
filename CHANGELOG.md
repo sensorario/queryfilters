@@ -5,3 +5,4 @@
  - change operator combination
  - add readme file
  - add documentation folder
+ - add installation in readme file

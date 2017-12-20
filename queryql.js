@@ -2,6 +2,9 @@ function QueryQl() {
     const relation = 1;    
 
     this.filters = [];
+
+    this.combine = 'filtering';
+
     this.rel = [];
 
     this.applyFilter = function (filter) {
@@ -20,9 +23,13 @@ function QueryQl() {
         return this.rel;
     };
 
-    this.getQueryString = function () {
+    this.getQueryString = function (combinator = null) {
         var qs = '';
         var rel = '';
+
+        if (combinator) {
+            this.combine = combinator;
+        }
 
         for (f in this.filters) {
             var filter = this.filters[f];
@@ -42,7 +49,7 @@ function QueryQl() {
                 qs += '&';
             }
 
-            qs += 'filtering['
+            qs += this.combine + '['
                 + filter.field
                 + ']='
                 + filter.value

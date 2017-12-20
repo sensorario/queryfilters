@@ -74,3 +74,17 @@ test('add all rel from each filter', () => {
         + '&filtering[_embedded.foo.bar.name]=Simone'
     );
 });
+
+test('change combination operation', () => {
+    var queryQl = new QueryQl()
+    queryQl.applyFilter({ field: '_embedded.relation.nick', value: '@sensorario' });
+    queryQl.applyFilter({ field: '_embedded.foo.bar.name', value: 'Simone' });
+    var operators = ['or', 'and'];
+    for (i in operators) {
+        expect(queryQl.getQueryString(operators[i])).toEqual(
+            'rel=relation,foo,bar'
+            + '&' + operators[i] + '[_embedded.relation.nick]=@sensorario'
+            + '&' + operators[i] + '[_embedded.foo.bar.name]=Simone'
+        );
+    }
+});

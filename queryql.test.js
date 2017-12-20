@@ -63,3 +63,14 @@ test('add rel with embedded filter even if have more levels', () => {
         'rel=foo,bar&filtering[_embedded.foo.bar.field]=666'
     );
 });
+
+test('add all rel from each filter', () => {
+    var queryQl = new QueryQl()
+    queryQl.applyFilter({ field: '_embedded.relation.nick', value: '@sensorario' });
+    queryQl.applyFilter({ field: '_embedded.foo.bar.name', value: 'Simone' });
+    expect(queryQl.getQueryString()).toEqual(
+        'rel=relation,foo,bar'
+        + '&filtering[_embedded.relation.nick]=@sensorario'
+        + '&filtering[_embedded.foo.bar.name]=Simone'
+    );
+});

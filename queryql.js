@@ -22,13 +22,20 @@ function QueryQl() {
 
     this.getQueryString = function () {
         var qs = '';
+        var rel = '';
+
         for (f in this.filters) {
             var filter = this.filters[f];
+
             if (this.containsRelations(filter)) {
                 splitted = filter.field.split('.')
                 splitted.pop(); // remove the last
                 splitted.shift(); // remove the first
-                qs += 'rel=' + splitted.join(); 
+                if (rel != '') {
+                    rel += ',' + splitted.join(); 
+                } else {
+                    rel += 'rel=' + splitted.join(); 
+                }
             }
 
             if (qs != '') {
@@ -41,7 +48,13 @@ function QueryQl() {
                 + filter.value
             ;
         }
-        return qs;
+
+        j = '';
+        if (rel != '' && qs != '') {
+            j = '&';
+        }
+
+        return rel + j + qs;
     };
 
     this.getFilters = function () {

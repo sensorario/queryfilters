@@ -38,11 +38,10 @@ function QueryQl() {
                 splitted = filter.field.split('.')
                 splitted.pop(); // remove the last
                 splitted.shift(); // remove the first
-                if (rel != '') {
-                    rel += ',' + splitted.join(); 
-                } else {
-                    rel += 'rel=' + splitted.join(); 
-                }
+
+                rel += (rel != '')
+                    ?  ',' + splitted.join()
+                    : 'rel=' + splitted.join(); 
             }
 
             if (qs != '') {

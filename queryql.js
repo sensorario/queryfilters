@@ -7,6 +7,8 @@ function QueryQl() {
 
     this.rel = [];
 
+    this.combinators = ['filtering', 'or', 'and'];
+
     this.applyFilter = function (filter) {
         this.filters.push(filter);
     };
@@ -23,13 +25,18 @@ function QueryQl() {
         return this.rel;
     };
 
-    this.getQueryString = function (combinator = null) {
+    this.setCombinator = function (combinator) {
+        this.combine = combinator;
+        return this;
+    };
+
+    this.getQueryString = function () {
+        if (!this.combinators.includes(this.combine)) {
+            throw new Error('combinator ' + this.combine + ' is not available');
+        }
+
         var qs = '';
         var rel = '';
-
-        if (combinator) {
-            this.combine = combinator;
-        }
 
         for (f in this.filters) {
             var filter = this.filters[f];

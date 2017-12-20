@@ -53,10 +53,23 @@ test('change combination operation', () => {
     queryQl.applyFilter({ field: '_embedded.foo.bar.name', value: 'Simone' });
     var operators = ['or', 'and'];
     for (i in operators) {
-        expect(queryQl.getQueryString(operators[i])).toEqual(
+        expect(queryQl.setCombinator(operators[i]).getQueryString()).toEqual(
             'rel=relation,foo,bar'
             + '&' + operators[i] + '[_embedded.relation.nick]=@sensorario'
             + '&' + operators[i] + '[_embedded.foo.bar.name]=Simone'
         );
     }
+});
+
+test('accept limited list of combinator', () => {
+    var queryQl = new QueryQl()
+    var catched = false;
+
+    try {
+        queryQl.setCombinator('invalid').getQueryString()
+    } catch (e) {
+        catched = true;
+    }
+
+    expect(catched).toEqual(true);
 });

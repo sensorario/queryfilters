@@ -1,6 +1,6 @@
 # queryfilters
 
-   npm install queryfilters
+   	⇓ npm install queryfilters
 
 ## Examples
 

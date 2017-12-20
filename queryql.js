@@ -76,4 +76,7 @@ function QueryQl() {
     };
 }
 
-module.exports = QueryQl;
+window.module = window.module || {};
+
+(module || {}).exports = QueryQl;
+

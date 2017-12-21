@@ -16,45 +16,41 @@ function Combinators () {
     };
 }
 
-function QueryQl() {
-    const relation = 1;    
+function QueryStringBuilder () {
+    this.filters = [];
 
-    combinators = new Combinators();
+    var combinators = new Combinators();
 
-    this.combinators = combinators.getCombinators()
+    this.combinators = combinators.getCombinators();
 
     this.combine = combinators.getDefaultCombinator();
 
-    this.filters = [];
-
-    this.rel = [];
-
-    this.applyFilter = function (filter) {
-        this.filters.push(filter);
-    };
-
-    this.getRels = function () {
-        this.rel = [];
-        for (f in this.filters) {
-            var filter = this.filters[f];
-            if (this.containsRelations(filter)) {
-                filterRelation = filter.field.split('.')[relation];
-                this.rel.push(filterRelation);
-            }
+    this.ensureHaveValidCombinator = function ()
+    {
+        if (!this.combinators.includes(this.getCombinator())) {
+            throw new Error('combinator ' + this.getCombinator() + ' is not available');
         }
-        return this.rel;
-    };
+
+        return this;
+    }
 
     this.setCombinator = function (combinator) {
         this.combine = combinator;
+
         return this;
     };
 
-    this.getQueryString = function () {
-        if (!this.combinators.includes(this.combine)) {
-            throw new Error('combinator ' + this.combine + ' is not available');
-        }
+    this.getCombinator = function () {
+        return this.combine;
+    };
 
+    this.setFilters = function (filters) {
+        this.filters = filters;
+
+        return this;
+    };
+
+    this.build = function () {
         var qs = '';
         var rel = '';
 
@@ -90,16 +86,54 @@ function QueryQl() {
         return rel + j + qs;
     };
 
+    this.containsRelations = function (filter) { 
+        return filter.field.indexOf('_embedded') !== -1;
+    };
+}
+
+function QueryQl() {
+    const relation = 1;    
+
+    this.setCombinator = function (combinator) {
+        this.builder.setCombinator(combinator);
+        return this;
+    };
+
+    this.builder = new QueryStringBuilder();
+
+    this.filters = [];
+
+    this.rel = [];
+
+    this.applyFilter = function (filter) {
+        this.filters.push(filter);
+    };
+
+    this.getRels = function () {
+        this.rel = [];
+        for (f in this.filters) {
+            var filter = this.filters[f];
+            if (this.builder.containsRelations(filter)) {
+                filterRelation = filter.field.split('.')[relation];
+                this.rel.push(filterRelation);
+            }
+        }
+        return this.rel;
+    };
+
+    this.getQueryString = function () {
+        return this.builder
+            .ensureHaveValidCombinator()
+            .setFilters(this.filters)
+            .build();
+    };
+
     this.getFilters = function () {
         var filters = [];
         for (f in this.filters) {
             filters.push(this.filters[f].field);
         }
         return filters;
-    };
-
-    this.containsRelations = function (filter) { 
-        return filter.field.indexOf('_embedded') !== -1;
     };
 }
 

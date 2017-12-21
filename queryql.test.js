@@ -8,8 +8,8 @@ test('expose a list of filters', () => {
 
 test('check if filter contains relations', () => {
     var queryQl = new QueryQl()
-    expect(queryQl.containsRelations({ field: 'id', value: 42 })).toBe(false);
-    expect(queryQl.containsRelations({ field: '_embedded.foo.bar', value: 42 })).toBe(true);
+    expect(queryQl.builder.containsRelations({ field: 'id', value: 42 })).toBe(false);
+    expect(queryQl.builder.containsRelations({ field: '_embedded.foo.bar', value: 42 })).toBe(true);
 });
 
 test('build a query string with filtes', () => {

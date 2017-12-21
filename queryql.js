@@ -91,6 +91,26 @@ function QueryStringBuilder () {
     };
 }
 
+function FilterManager() {
+    this.filters = [];
+    this.push = function (filter) {
+        this.filters.push(filter);
+    };
+    this.getFilters = function () {
+        return this.filters;
+    };
+    this.getFilter = function (index) {
+        return this.filters[index];
+    }
+    this.getFields = function () {
+        var filters = [];
+        for (f in this.getFilters()) {
+            filters.push(this.getFilter(f).field);
+        }
+        return filters;
+    }
+}
+
 function QueryQl() {
     const relation = 1;    
 
@@ -101,18 +121,19 @@ function QueryQl() {
 
     this.builder = new QueryStringBuilder();
 
-    this.filters = [];
+    this.filterManager = new FilterManager();
 
     this.rel = [];
 
     this.applyFilter = function (filter) {
-        this.filters.push(filter);
+        this.filterManager
+            .push(filter);
     };
 
     this.getRels = function () {
         this.rel = [];
-        for (f in this.filters) {
-            var filter = this.filters[f];
+        for (f in this.filterManager.getFilters()) {
+            var filter = this.filterManager.getFilter(f);
             if (this.builder.containsRelations(filter)) {
                 filterRelation = filter.field.split('.')[relation];
                 this.rel.push(filterRelation);
@@ -124,16 +145,13 @@ function QueryQl() {
     this.getQueryString = function () {
         return this.builder
             .ensureHaveValidCombinator()
-            .setFilters(this.filters)
+            .setFilters(this.filterManager.getFilters())
             .build();
     };
 
     this.getFilters = function () {
-        var filters = [];
-        for (f in this.filters) {
-            filters.push(this.filters[f].field);
-        }
-        return filters;
+        return this.filterManager
+            .getFields();
     };
 }
 

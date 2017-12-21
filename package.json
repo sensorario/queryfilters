@@ -1,6 +1,6 @@
 {
     "name": "queryfilters",
-    "version": "v0.1.6",
+    "version": "v0.1.7",
     "scripts": {
         "test": "jest"
     },
@@ -10,7 +10,8 @@
         "sensorario"
     ],
     "author": "Simone Gentili <sensorario@gmail.com>",
-    "licence": "MIT",
+    "license": "MIT",
+    "repository": "https://github.com/sensorario/queryfilters",
     "devDependencies": {
         "jest": "^21.2.1"
     }

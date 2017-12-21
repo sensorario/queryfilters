@@ -7,3 +7,4 @@
  - add documentation folder
  - add installation in readme file
  - accept limited list of combinators
+ - complete package.json

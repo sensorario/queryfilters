@@ -1,13 +1,33 @@
+function Combinators () {
+    const COMBINATORS_AND = 'and';
+    const COMBINATORS_DEFAULT = 'filtering';
+    const COMBINATORS_OR = 'or';
+
+    this.getCombinators = function () {
+        return [
+            COMBINATORS_AND,
+            COMBINATORS_DEFAULT,
+            COMBINATORS_OR
+        ];
+    }
+
+    this.getDefaultCombinator = function () {
+        return COMBINATORS_DEFAULT;
+    };
+}
+
 function QueryQl() {
     const relation = 1;    
 
+    combinators = new Combinators();
+
+    this.combinators = combinators.getCombinators()
+
+    this.combine = combinators.getDefaultCombinator();
+
     this.filters = [];
 
-    this.combine = 'filtering';
-
     this.rel = [];
-
-    this.combinators = ['filtering', 'or', 'and'];
 
     this.applyFilter = function (filter) {
         this.filters.push(filter);

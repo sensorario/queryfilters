@@ -10,3 +10,4 @@
  - complete `package.json`
  - introduce [FilterManager] component
  - make queries via json
+ - keep tests separated by feature

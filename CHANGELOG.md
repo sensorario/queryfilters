@@ -7,5 +7,6 @@
  - add documentation folder
  - add installation in readme file
  - accept limited list of combinators
- - complete package.json
- - introduce FilterManager component
+ - complete `package.json`
+ - introduce [FilterManager] component
+ - make queries via json

@@ -153,6 +153,40 @@ function QueryQl() {
         return this.filterManager
             .getFields();
     };
+
+    this.containsCombinator = function (jsonQuery) {
+        for (i in jsonQuery) {
+            if ('object' == typeof jsonQuery[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    this.detectCombinator = function (jsonQuery) {
+        for (i in jsonQuery) {
+            if ('object' == typeof jsonQuery[i]) {
+                return i;
+            }
+        }
+
+        return false;
+    }
+
+    this.json = function (jsonQuery) {
+        var fields = jsonQuery;
+
+        if (this.containsCombinator(jsonQuery)) {
+            var combinator = this.detectCombinator(jsonQuery)
+            this.setCombinator(combinator);
+            fields = jsonQuery[combinator];
+        }
+
+        for (i in fields) {
+            this.applyFilter({ field: i, value: fields[i] });
+        }
+    }
 }
 
 window.module = window.module || {};

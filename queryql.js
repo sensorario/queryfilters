@@ -189,7 +189,7 @@ function QueryQl() {
     }
 }
 
-window.module = window.module || {};
+global.module = global.module || {};
 
 (module || {}).exports = QueryQl;
 

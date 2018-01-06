@@ -1,6 +1,16 @@
 # queryfilters
 
-   	⇓ npm install queryfilters
+ * https://www.npmjs.com/package/queryfilters
+
+## Install
+
+Install via npm
+
+   	$ npm install queryfilters
+
+Include in your web application
+
+    <script src="node_modules/queryfilters/queryql/dist/queryql-min.js"></script>
 
 ## Examples
 

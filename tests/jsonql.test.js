@@ -1,4 +1,4 @@
-const QueryQl = require('./queryql');
+const QueryQl = require('./../lib/queryql');
 
 test('accept json as query', () => {
     var jsonQuery = {

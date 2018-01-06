@@ -1,4 +1,4 @@
-const QueryQl = require('./queryql');
+const QueryQl = require('./../lib/queryql');
 
 test('expose a list of filters', () => {
     var queryQl = new QueryQl()

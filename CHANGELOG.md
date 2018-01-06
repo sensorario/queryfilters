@@ -13,3 +13,4 @@
  - keep tests separated by feature
  - add examples with json queries
  - add travisCI integration
+ - minified version

@@ -1,4 +1,4 @@
-const QueryQl = require('./queryql');
+const QueryQl = require('./../lib/queryql');
 
 test('apply filters with or operator', () => {
     var queryQl = new QueryQl()

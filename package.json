@@ -1,18 +1,20 @@
 {
-    "name": "queryfilters",
-    "version": "v0.2.4",
-    "scripts": {
-        "test": "jest"
-    },
-    "keywords": [
-        "hal",
-        "hateoas",
-        "sensorario"
-    ],
-    "author": "Simone Gentili <sensorario@gmail.com>",
-    "license": "MIT",
-    "repository": "https://github.com/sensorario/queryfilters",
-    "devDependencies": {
-        "jest": "^21.2.1"
-    }
+  "name": "queryfilters",
+  "version": "v0.2.4",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "hal",
+    "hateoas",
+    "sensorario"
+  ],
+  "author": "Simone Gentili <sensorario@gmail.com>",
+  "license": "MIT",
+  "repository": "https://github.com/sensorario/queryfilters",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-minify": "^2.1.0",
+    "jest": "^21.2.1"
+  }
 }

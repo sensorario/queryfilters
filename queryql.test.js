@@ -47,18 +47,26 @@ test('add all rel from each filter', () => {
     );
 });
 
-test('change combination operation', () => {
+test('apply filters with or operator', () => {
     var queryQl = new QueryQl()
     queryQl.applyFilter({ field: '_embedded.relation.nick', value: '@sensorario' });
     queryQl.applyFilter({ field: '_embedded.foo.bar.name', value: 'Simone' });
-    var operators = ['or', 'and'];
-    for (i in operators) {
-        expect(queryQl.setCombinator(operators[i]).getQueryString()).toEqual(
-            'rel=relation,foo,bar'
-            + '&' + operators[i] + '[_embedded.relation.nick]=@sensorario'
-            + '&' + operators[i] + '[_embedded.foo.bar.name]=Simone'
-        );
-    }
+    expect(queryQl.setCombinator('or').getQueryString()).toEqual(
+        'rel=relation,foo,bar'
+        + '&or[_embedded.relation.nick]=@sensorario'
+        + '&or[_embedded.foo.bar.name]=Simone'
+    );
+});
+
+test('apply filters with and operator', () => {
+    var queryQl = new QueryQl()
+    queryQl.applyFilter({ field: '_embedded.relation.nick', value: '@sensorario' });
+    queryQl.applyFilter({ field: '_embedded.foo.bar.name', value: 'Simone' });
+    expect(queryQl.setCombinator('and').getQueryString()).toEqual(
+        'rel=relation,foo,bar'
+        + '&and[_embedded.relation.nick]=@sensorario'
+        + '&and[_embedded.foo.bar.name]=Simone'
+    );
 });
 
 test('accept limited list of combinator', () => {

@@ -11,3 +11,4 @@
  - introduce [FilterManager] component
  - make queries via json
  - keep tests separated by feature
+ - add examples with json queries

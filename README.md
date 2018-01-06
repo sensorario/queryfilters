@@ -6,11 +6,15 @@
 
 Install via npm
 
-   	$ npm install queryfilters
+```bash
+$ npm install queryfilters
+```
 
 Include in your web application
 
-    <script src="node_modules/queryfilters/queryql/dist/queryql-min.js"></script>
+```html
+<script src="node_modules/queryfilters/queryql/dist/queryql-min.js"></script>
+```
 
 ## Examples
 

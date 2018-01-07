@@ -1,12 +1,14 @@
 function Combinators () {
     const COMBINATORS_AND = 'and';
     const COMBINATORS_DEFAULT = 'filtering';
+    const COMBINATORS_FILTERING_OR = 'filtering_or';
     const COMBINATORS_OR = 'or';
 
     this.getCombinators = function () {
         return [
             COMBINATORS_AND,
             COMBINATORS_DEFAULT,
+            COMBINATORS_FILTERING_OR,
             COMBINATORS_OR
         ];
     }
@@ -60,7 +62,9 @@ function QueryStringBuilder () {
             if (this.containsRelations(filter)) {
                 splitted = filter.field.split('.')
                 splitted.pop(); // remove the last
-                splitted.shift(); // remove the first
+                if (this.containsEmbedded(filter)) {
+                    splitted.shift(); // remove the first
+                }
 
                 rel += (rel != '')
                     ?  ',' + splitted.join()
@@ -70,9 +74,9 @@ function QueryStringBuilder () {
             if (qs != '') {
                 qs += '&';
             }
-
+            
             qs += this.combine + '['
-                + filter.field
+                + this.getFilterIndex(filter)
                 + ']='
                 + filter.value
             ;
@@ -86,8 +90,20 @@ function QueryStringBuilder () {
         return rel + j + qs;
     };
 
+    this.getFilterIndex = function (filter) {
+        if (!this.containsEmbedded(filter) && this.containsRelations(filter)) {
+            return '_embedded.'+ filter.field;
+        }
+
+        return filter.field;
+    }
+
     this.containsRelations = function (filter) { 
-        return filter.field.indexOf('_embedded') !== -1;
+        return filter.field.indexOf('.') !== -1;
+    };
+
+    this.containsEmbedded = function (filter) { 
+        return filter.field.indexOf('_embedded') === 0;
     };
 }
 
@@ -172,6 +188,15 @@ function QueryQl() {
         }
 
         return false;
+    }
+
+    this.keepDefaultCombinator = function () {
+        return this;
+    }
+
+    this.keepOrFilteringCombinator = function () {
+        this.setCombinator('filtering_or');
+        return this;
     }
 
     this.json = function (jsonQuery) {

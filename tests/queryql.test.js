@@ -13,6 +13,7 @@ test('check if filter contains relations', () => {
     expect(queryQl.builder.containsRelations({ field: 'foo.bar', value: 42 })).toBe(true);
     expect(queryQl.builder.containsEmbedded({ field: '_embedded.foo.bar', value: 42 })).toBe(true);
     expect(queryQl.builder.containsEmbedded({ field: 'foo.bar', value: 42 })).toBe(false);
+    expect(queryQl.builder.containsEmbedded({ field: 'bar', value: 42 })).toBe(false);
 });
 
 test('build a query string with filtes', () => {

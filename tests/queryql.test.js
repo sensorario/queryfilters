@@ -10,6 +10,9 @@ test('check if filter contains relations', () => {
     var queryQl = new QueryQl()
     expect(queryQl.builder.containsRelations({ field: 'id', value: 42 })).toBe(false);
     expect(queryQl.builder.containsRelations({ field: '_embedded.foo.bar', value: 42 })).toBe(true);
+    expect(queryQl.builder.containsRelations({ field: 'foo.bar', value: 42 })).toBe(true);
+    expect(queryQl.builder.containsEmbedded({ field: '_embedded.foo.bar', value: 42 })).toBe(true);
+    expect(queryQl.builder.containsEmbedded({ field: 'foo.bar', value: 42 })).toBe(false);
 });
 
 test('build a query string with filtes', () => {
@@ -40,6 +43,17 @@ test('add all rel from each filter', () => {
     var queryQl = new QueryQl()
     queryQl.applyFilter({ field: '_embedded.relation.nick', value: '@sensorario' });
     queryQl.applyFilter({ field: '_embedded.foo.bar.name', value: 'Simone' });
+    expect(queryQl.getQueryString()).toEqual(
+        'rel=relation,foo,bar'
+        + '&filtering[_embedded.relation.nick]=@sensorario'
+        + '&filtering[_embedded.foo.bar.name]=Simone'
+    );
+});
+
+test('auto prepend _embedded', () => {
+    var queryQl = new QueryQl()
+    queryQl.applyFilter({ field: 'relation.nick', value: '@sensorario' });
+    queryQl.applyFilter({ field: 'foo.bar.name', value: 'Simone' });
     expect(queryQl.getQueryString()).toEqual(
         'rel=relation,foo,bar'
         + '&filtering[_embedded.relation.nick]=@sensorario'

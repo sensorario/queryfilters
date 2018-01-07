@@ -19,10 +19,10 @@ Include in your web application
     qql.json({
         'and': {
             'foo': 'bar',
-            'pippo': 'pluto'
+            'fizz.buzz': 'pluto'
         }
     });
-    // and[foo]=bar&and[pippo]=pluto
+    // and[foo]=bar&and[_embedded.fizz.buzz]=pluto
     var query = qql.getQueryString();
 </script>
 ```

@@ -14,3 +14,4 @@
  - add examples with json queries
  - add travisCI integration
  - minified version
+ - auto prepend _embedded if not spcified

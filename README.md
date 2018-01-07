@@ -6,11 +6,26 @@
 
 Install via npm
 
-   	$ npm install queryfilters
+```bash
+$ npm install queryfilters
+```
 
 Include in your web application
 
-    <script src="node_modules/queryfilters/queryql/dist/queryql-min.js"></script>
+```html
+<script src="node_modules/queryfilters/queryql/dist/queryql-min.js"></script>
+<script language="javascript">
+    var qql = new QueryQl();
+    qql.json({
+        'and': {
+            'foo': 'bar',
+            'pippo': 'pluto'
+        }
+    });
+    // and[foo]=bar&and[pippo]=pluto
+    var query = qql.getQueryString();
+</script>
+```
 
 ## Examples
 

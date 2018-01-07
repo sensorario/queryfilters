@@ -4,7 +4,7 @@ This is a little example that helps to include queryfilters in a Vue project.
 
 ```javascript
 <script src="https://unpkg.com/vue"></script>
-<script src="node_modules/queryfilters/queryql.js"></script>
+<script src="node_modules/queryfilters/queryql/dist/queryql-min.js"></script>
 
 <div id="app">
     <div>{{ json_query }}</div>

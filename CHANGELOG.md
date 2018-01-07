@@ -15,3 +15,4 @@
  - add travisCI integration
  - minified version
  - auto prepend _embedded if not spcified
+ - allow also `filtering_or` operator

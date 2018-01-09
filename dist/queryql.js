@@ -257,6 +257,52 @@ function QueryQl() {
             }
         }
     };
+
+    this.or = function (jsonQuery, options) {
+        if ('object' == typeof options) {
+            if (options.oldStyle == true) {
+                this.json({
+                    'filtering_or': jsonQuery
+                });
+                return;
+            }
+        }
+
+        this.json({
+            'or': jsonQuery
+        });
+        return;
+    };
+
+    this.and = function (jsonQuery, options) {
+        if ('object' == typeof options) {
+            if (options.oldStyle == true) {
+                this.json({
+                    'filtering': jsonQuery
+                });
+                return;
+            }
+        }
+
+        this.json({
+            'and': jsonQuery
+        });
+        return;
+    };
+
+    this.andFiltering = function (jsonQuery) {
+        var jsonQuery = {
+            'filtering': jsonQuery
+        };
+        this.json(jsonQuery);
+    };
+
+    this.orFiltering = function (jsonQuery) {
+        var jsonQuery = {
+            'filtering_or': jsonQuery
+        };
+        this.json(jsonQuery);
+    };
 }
 
 global.module = global.module || {};

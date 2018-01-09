@@ -107,3 +107,31 @@ test('query all fields with filtering_or using orFiltering() alias', () => {
         + '&filtering_or[_embedded.foo.bar.name]=Simone'
     );
 });
+
+test('force old style querystring even if and alias is used', () => {
+    var jsonQuery = {
+        'relation.nick': '@sensorario',
+        'foo.bar.name': 'Simone'
+    };
+    var queryQl = new QueryQl()
+    queryQl.and(jsonQuery, {oldStyle:true});
+    expect(queryQl.getQueryString()).toEqual(
+        'rel=relation,foo,bar'
+        + '&filtering[_embedded.relation.nick]=@sensorario'
+        + '&filtering[_embedded.foo.bar.name]=Simone'
+    );
+});
+
+test('force old style querystring even if or alias is used', () => {
+    var jsonQuery = {
+        'relation.nick': '@sensorario',
+        'foo.bar.name': 'Simone'
+    };
+    var queryQl = new QueryQl()
+    queryQl.or(jsonQuery, {oldStyle:true});
+    expect(queryQl.getQueryString()).toEqual(
+        'rel=relation,foo,bar'
+        + '&filtering_or[_embedded.relation.nick]=@sensorario'
+        + '&filtering_or[_embedded.foo.bar.name]=Simone'
+    );
+});

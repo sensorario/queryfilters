@@ -135,3 +135,16 @@ test('force old style querystring even if or alias is used', () => {
         + '&filtering_or[_embedded.foo.bar.name]=Simone'
     );
 });
+
+test.only('allow contains operator with arrays', () => {
+    var jsonQuery = {
+        'relation.nick|contains': ['senso', 'rario'],
+    };
+    var queryQl = new QueryQl()
+    queryQl.and(jsonQuery, {oldStyle:true});
+    expect(queryQl.getQueryString()).toEqual(
+        'rel=relation'
+        + '&filtering[_embedded.relation.nick|contains|1]=senso'
+        + '&filtering[_embedded.relation.nick|contains|2]=rario'
+    );
+});

@@ -20,3 +20,4 @@
  - detect if operator is correct or not
  - add aliases `and`, `or`, `andFiltering` and `orFiltering`
  - force old style queries still using aliases
+ - apply operator more times using arrays

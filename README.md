@@ -32,3 +32,4 @@ Include in your web application
  * [pure javascript example](doc/examples/javascript.md)
  * [query api with json](doc/examples/json.md)
  * [wrap combinators](doc/examples/combinators.md)
+ * [old style queries using aliases](doc/examples/aliases.md)

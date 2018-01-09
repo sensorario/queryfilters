@@ -16,11 +16,9 @@ Include in your web application
 <script src="node_modules/queryfilters/queryql/dist/queryql-min.js"></script>
 <script language="javascript">
     var qql = new QueryQl();
-    qql.json({
-        'and': {
-            'foo': 'bar',
-            'fizz.buzz': 'pluto'
-        }
+    qql.and({
+        'foo': 'bar',
+        'fizz.buzz': 'pluto'
     });
     // and[foo]=bar&and[_embedded.fizz.buzz]=pluto
     var query = qql.getQueryString();
@@ -29,7 +27,8 @@ Include in your web application
 
 ## Examples
 
- * [an example with vue](doc/examples/vue.md)
  * [a json Query example with vue](doc/examples/vue-with-json.md)
+ * [an example with vue](doc/examples/vue.md)
  * [pure javascript example](doc/examples/javascript.md)
  * [query api with json](doc/examples/json.md)
+ * [wrap combinators](doc/examples/combinators.md)

@@ -18,3 +18,4 @@
  - allow also `filtering_or` operator
  - parse fields and detect operators
  - detect if operator is correct or not
+ - add aliases `and`, `or`, `andFiltering` and `orFiltering`

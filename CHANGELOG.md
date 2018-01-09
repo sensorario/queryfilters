@@ -19,3 +19,4 @@
  - parse fields and detect operators
  - detect if operator is correct or not
  - add aliases `and`, `or`, `andFiltering` and `orFiltering`
+ - force old style queries still using aliases

@@ -1,7 +1,7 @@
 queryfilters
 ============
 
-[![Build Status](https://travis-ci.org/sensorario/queryfilters.svg?branch=master)](https://travis-ci.org/sensorario/queryfilters)
+[![Build Status](https://travis-ci.org/sensorario/queryfilters.svg?branch=master)](https://travis-ci.org/sensorario/queryfilters) [![npm version](https://badge.fury.io/js/queryfilters.svg)](https://badge.fury.io/js/queryfilters)
 
  * https://www.npmjs.com/package/queryfilters
 

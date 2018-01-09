@@ -55,6 +55,7 @@ function QueryStringBuilder() {
         var rel = "";
         var filterKeys = Object.keys(this.filters);
         var i = 0, l = 0, filter = [], splitted = [];
+        var relationAdded = [];
         for (l = filterKeys.length; i < l; i += 1) {
             filter = this.filters[filterKeys[i]];
 
@@ -65,9 +66,15 @@ function QueryStringBuilder() {
                     splitted.shift();
                 }
 
-                rel += (rel != "")
-                    ? "," + splitted.join()
-                    : "rel=" + splitted.join();
+                var relationName =  splitted.join();
+
+                if (false == relationAdded.includes(relationName)) {
+                    rel += (rel != "")
+                        ? "," + relationName
+                        : "rel=" + relationName;
+                }
+
+                relationAdded.push(relationName);
             }
 
             if (qs != "") {
@@ -207,7 +214,20 @@ function QueryQl() {
     this.json = function (jsonQuery) {
         var fields = this.buildFieldsWithRightCombinator(jsonQuery)
         for (var i in fields) {
-            this.applyFilter({ field: i, value: fields[i] });
+            if ('object' == typeof fields[i]) {
+                var position = 1;
+                for (var f in fields[i]) {
+                    var positionalField = i + '|' + position;
+                    var positionalValue = fields[i][f];
+                    position += 1;
+                    this.applyFilter({
+                        field: positionalField,
+                        value: positionalValue
+                    });
+                }
+            } else {
+                this.applyFilter({ field: i, value: fields[i] });
+            }
         }
     };
 

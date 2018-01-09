@@ -141,7 +141,7 @@ test.only('allow contains operator with arrays', () => {
         'relation.nick|contains': ['senso', 'rario'],
     };
     var queryQl = new QueryQl()
-    queryQl.and(jsonQuery, {oldStyle:true});
+    queryQl.andFiltering(jsonQuery);
     expect(queryQl.getQueryString()).toEqual(
         'rel=relation'
         + '&filtering[_embedded.relation.nick|contains|1]=senso'

@@ -10,7 +10,7 @@ var jsonQuery = {
     'relation.nick|contains': ['senso', 'rario'],
 };
 var queryQl = new QueryQl()
-queryQl.and(jsonQuery, {oldStyle:true});
+queryQl.andFiltering(jsonQuery);
 ```
 
 The result is the following query that apply same operator to same field but

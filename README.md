@@ -1,8 +1,12 @@
-# queryfilters
+queryfilters
+============
+
+[![Build Status](https://travis-ci.org/sensorario/queryfilters.svg?branch=master)](https://travis-ci.org/sensorario/queryfilters) [![npm version](https://badge.fury.io/js/queryfilters.svg)](https://badge.fury.io/js/queryfilters)
 
  * https://www.npmjs.com/package/queryfilters
 
-## Install
+Install
+-------
 
 Install via npm
 
@@ -25,7 +29,8 @@ Include in your web application
 </script>
 ```
 
-## Examples
+Examples
+--------
 
  * [a json Query example with vue](doc/examples/vue-with-json.md)
  * [an example with vue](doc/examples/vue.md)

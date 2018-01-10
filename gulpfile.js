@@ -6,3 +6,4 @@ gulp.task('compress', function() {
     .pipe(minify())
     .pipe(gulp.dest('dist'))
 });
+ 

@@ -1,10 +1,10 @@
 "use strict";
 
 function Combinators() {
-    const COMBINATORS_AND = "and";
-    const COMBINATORS_DEFAULT = "filtering";
-    const COMBINATORS_FILTERING_OR = "filtering_or";
-    const COMBINATORS_OR = "or";
+    var COMBINATORS_AND = "and";
+    var COMBINATORS_DEFAULT = "filtering";
+    var COMBINATORS_FILTERING_OR = "filtering_or";
+    var COMBINATORS_OR = "or";
 
     this.getCombinators = function () {
         return [
@@ -143,7 +143,7 @@ function FilterManager() {
 }
 
 function QueryQl() {
-    const relation = 1;
+    var relation = 1;
 
     this.setCombinator = function (combinator) {
         this.builder.setCombinator(combinator);
@@ -163,7 +163,6 @@ function QueryQl() {
 
     this.getRels = function () {
         this.rel = [];
-        var filterKeys = Object.keys(this.filterManager.getFilters());
         for (var f in this.filterManager.getFilters()) {
             var filter = this.filterManager.getFilter(f);
             if (this.builder.containsRelations(filter)) {
@@ -216,12 +215,12 @@ function QueryQl() {
     };
 
     this.json = function (jsonQuery) {
-        var fields = this.buildFieldsWithRightCombinator(jsonQuery)
+        var fields = this.buildFieldsWithRightCombinator(jsonQuery);
         for (var i in fields) {
-            if ('object' == typeof fields[i]) {
+            if ("object" == typeof fields[i]) {
                 var position = 1;
                 for (var f in fields[i]) {
-                    var positionalField = i + '|' + position;
+                    var positionalField = i + "|" + position;
                     var positionalValue = fields[i][f];
                     position += 1;
                     this.applyFilter({
@@ -238,7 +237,7 @@ function QueryQl() {
     this.buildFieldsWithRightCombinator = function (jsonQuery) {
         var fields = jsonQuery;
         if (this.containsCombinator(jsonQuery)) {
-            var combinator = this.detectCombinator(jsonQuery)
+            var combinator = this.detectCombinator(jsonQuery);
             this.setCombinator(combinator);
             fields = jsonQuery[combinator];
         }
@@ -283,49 +282,49 @@ function QueryQl() {
     };
 
     this.or = function (jsonQuery, options) {
-        if ('object' == typeof options) {
+        if ("object" == typeof options) {
             if (options.oldStyle == true) {
                 this.json({
-                    'filtering_or': jsonQuery
+                    "filtering_or": jsonQuery
                 });
                 return;
             }
         }
 
         this.json({
-            'or': jsonQuery
+            "or": jsonQuery
         });
         return;
     };
 
     this.and = function (jsonQuery, options) {
-        if ('object' == typeof options) {
+        if ("object" == typeof options) {
             if (options.oldStyle == true) {
                 this.json({
-                    'filtering': jsonQuery
+                    "filtering": jsonQuery
                 });
                 return;
             }
         }
 
         this.json({
-            'and': jsonQuery
+            "and": jsonQuery
         });
         return;
     };
 
     this.andFiltering = function (jsonQuery) {
-        var jsonQuery = {
-            'filtering': jsonQuery
+        var newJsonQuery = {
+            "filtering": jsonQuery
         };
-        this.json(jsonQuery);
+        this.json(newJsonQuery);
     };
 
     this.orFiltering = function (jsonQuery) {
-        var jsonQuery = {
-            'filtering_or': jsonQuery
+        var newJsonQuery = {
+            "filtering_or": jsonQuery
         };
-        this.json(jsonQuery);
+        this.json(newJsonQuery);
     };
 
     this.storedQueries = [];
@@ -343,7 +342,7 @@ function QueryQl() {
         return this.getQueryString();
     };
 
-    this.getQueryParameter = function(alias, parameter) {
+    this.getQueryParameter = function(alias) {
         return this.storedQueries[alias].parameter;
     };
 
@@ -354,7 +353,7 @@ function QueryQl() {
     this.getFinalQuery = function(alias, param) {
         var rawQuery = this.getRawQuery(alias);
         return rawQuery.replace(
-            '##' + this.getQueryParameter(alias) + '##',
+            "##" + this.getQueryParameter(alias) + "##",
             param
         );
     };

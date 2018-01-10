@@ -29,8 +29,9 @@ Include in your web application
 
  * [a json Query example with vue](doc/examples/vue-with-json.md)
  * [an example with vue](doc/examples/vue.md)
+ * [apply operator more times](doc/examples/operators.md)
  * [old style queries using aliases](doc/examples/aliases.md)
  * [pure javascript example](doc/examples/javascript.md)
  * [query api with json](doc/examples/json.md)
+ * [store queries](doc/examples/store.md)
  * [wrap combinators](doc/examples/combinators.md)
- * [apply operator more times](doc/examples/operators.md)

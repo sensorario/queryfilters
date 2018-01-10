@@ -116,6 +116,10 @@ function QueryStringBuilder() {
 function FilterManager() {
     this.filters = [];
 
+    this.reset = function () {
+        this.filters = [];
+    };
+
     this.push = function (filter) {
         this.filters.push(filter);
     };
@@ -322,6 +326,37 @@ function QueryQl() {
             'filtering_or': jsonQuery
         };
         this.json(jsonQuery);
+    };
+
+    this.storedQueries = [];
+
+    this.store = function(query, alias, parameter) {
+        this.storedQueries[alias] = {
+            query: query,
+            parameter: parameter
+        };
+    };
+
+    this.getStoredQuery = function(alias) {
+        this.filterManager.reset();
+        this.json(this.storedQueries[alias].query);
+        return this.getQueryString();
+    };
+
+    this.getQueryParameter = function(alias, parameter) {
+        return this.storedQueries[alias].parameter;
+    };
+
+    this.getRawQuery = function(alias) {
+        return this.getStoredQuery(alias);
+    };
+
+    this.getFinalQuery = function(alias, param) {
+        var rawQuery = this.getRawQuery(alias);
+        return rawQuery.replace(
+            '##' + this.getQueryParameter(alias) + '##',
+            param
+        );
     };
 }
 

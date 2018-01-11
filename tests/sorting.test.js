@@ -24,7 +24,7 @@ test('sort and ', () => {
             }
         },
         sort: {
-            relation.nick: 'asc'
+            'relation.nick': 'asc'
         }
     });
 

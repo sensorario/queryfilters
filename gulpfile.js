@@ -6,6 +6,13 @@ gulp.task('default', ['lint', 'compress'], function() {
     // ...
 });
 
+gulp.task('publish', function() {
+    gulp.pipe(shell([
+            'git push origin master',
+            'npm publish'
+        ]));
+});
+
 gulp.task('test', function() {
     gulp.src('lib/*.js').
         pipe(shell([

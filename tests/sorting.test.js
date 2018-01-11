@@ -13,3 +13,25 @@ test('sort fields', () => {
         + '&sorting[_embedded.relation.nick]=asc'
     );
 });
+
+test('sort and ', () => {
+    var queryQl = new QueryQl()
+
+    var result = queryQl.build({
+        query: {
+            filtering: {
+                'relation.nick|contains': ['senso', 'rario']
+            }
+        },
+        sort: {
+            relation.nick: 'asc'
+        }
+    });
+
+    expect(result).toEqual(
+        'rel=relation'
+        + '&filtering[_embedded.relation.nick|contains|1]=senso'
+        + '&filtering[_embedded.relation.nick|contains|2]=rario'
+        + '&sorting[_embedded.relation.nick]=asc'
+    );
+});

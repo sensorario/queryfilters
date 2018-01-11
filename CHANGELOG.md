@@ -23,3 +23,4 @@
  - apply operator more times using arrays
  - store queries with name
  - sort by field name
+ - query and sort with single command

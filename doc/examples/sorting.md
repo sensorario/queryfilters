@@ -13,3 +13,23 @@ queryQl.sort({'relation.nick': 'asc'});
 + '&filtering[_embedded.relation.nick|contains|2]=rario'
 + '&sorting[_embedded.relation.nick]=asc'
 ```
+
+Same result can be reached with `build` method that do the complete work:
+
+ * filtering (and, or, …)
+ * sorting
+
+```javascript
+var queryQl = new QueryQl()
+
+var result = queryQl.build({
+    query: {
+        filtering: {
+            'relation.nick|contains': ['senso', 'rario']
+        }
+    },
+    sort: {
+        relation.nick: 'asc'
+    }
+});
+```

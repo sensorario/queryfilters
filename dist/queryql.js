@@ -2,9 +2,9 @@
 
 function Combinators() {
     var COMBINATORS_AND = "and";
-    var COMBINATORS_DEFAULT = "filtering"
+    var COMBINATORS_DEFAULT = "filtering";
     var COMBINATORS_FILTERING_OR = "filtering_or";
-    var COMBINATORS_OR = "or"
+    var COMBINATORS_OR = "or";
 
     this.getCombinators = function () {
         return [
@@ -395,6 +395,12 @@ function QueryQl() {
             "##" + this.getQueryParameter(alias) + "##",
             param
         );
+    };
+
+    this.build = function(conf) {
+        this.json(conf.query);
+        this.sort(conf.sort);
+        return this.getQueryString();
     };
 }
 

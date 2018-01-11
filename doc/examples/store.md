@@ -37,20 +37,20 @@ parametrized query in this way.
 ```javascript
 queryQl.store({
     'filtering': {
-        'relation.nick': '##nickname##'
+        'relation.field': '##fieldname##'
     }
-}, 'findUserByUsername', 'nickname');
+}, 'findByValue', 'fieldname');
 ```
 As you can see is it possible sto store the query, assign an alias and a name
 for the parameter. Is also possibile to build the parameter query using the
 method `getFinalQuery` with alias and the parameter value.
 
 ```javascript
-queryQl.getFinalQuery('findUserByUsername', 'simone')
+queryQl.getFinalQuery('findByValue', '42')
 ```
 
 Returned query string is the following.
 
 ```javascript
-'rel=relation&filtering[_embedded.relation.nick]=simone'
+'rel=relation&filtering[_embedded.relation.field]=42'
 ```

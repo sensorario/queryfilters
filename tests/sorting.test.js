@@ -1,6 +1,6 @@
 const QueryQl = require('./../lib/queryql');
 
-test.only('sort fields', () => {
+test('sort fields', () => {
     var queryQl = new QueryQl()
 
     queryQl.and({'relation.nick|contains': ['senso', 'rario']}, {oldStyle:true});

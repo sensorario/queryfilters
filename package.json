@@ -1,9 +1,12 @@
 {
   "name": "queryfilters",
-  "version": "v0.3.7",
+  "version": "v0.3.8",
   "scripts": {
     "test": "jest",
     "lint": "eslint lib"
+  },
+  "jest": {
+    "verbose": true
   },
   "keywords": [
     "hal",
@@ -22,6 +25,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "gulp": "^3.9.1",
     "gulp-minify": "^2.1.0",
+    "gulp-shell": "^0.6.5",
     "jest": "^21.2.1"
   }
 }

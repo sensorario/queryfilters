@@ -136,7 +136,7 @@ test('force old style querystring even if or alias is used', () => {
     );
 });
 
-test.only('allow contains operator with arrays', () => {
+test('allow contains operator with arrays', () => {
     var jsonQuery = {
         'relation.nick|contains': ['senso', 'rario'],
     };

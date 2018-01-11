@@ -1,9 +1,28 @@
 var gulp = require('gulp');
 var minify = require('gulp-minify');
- 
-gulp.task('compress', function() {
-  gulp.src('lib/*.js')
-    .pipe(minify())
-    .pipe(gulp.dest('dist'))
+var shell = require('gulp-shell')
+
+gulp.task('default', ['lint', 'compress'], function() {
+    // ...
 });
- 
+
+gulp.task('test', function() {
+    gulp.src('lib/*.js').
+        pipe(shell([
+            'clear',
+            'npm test'
+        ]));
+});
+
+gulp.task('lint', function() {
+    gulp.src('lib/*.js').
+        pipe(shell([
+            'npm run lint -- --fix'
+        ]));
+});
+
+gulp.task('compress', function() {
+    gulp.src('lib/*.js')
+        .pipe(minify())
+        .pipe(gulp.dest('dist'))
+});

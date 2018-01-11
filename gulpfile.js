@@ -7,7 +7,7 @@ gulp.task('default', ['lint', 'compress'], function() {
 });
 
 gulp.task('publish', function() {
-    gulp.src('lib/*.js').
+    gulp.src('lib/*.js')
         .pipe(shell([
             'git push origin master',
             'npm publish'

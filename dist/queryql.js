@@ -405,12 +405,12 @@ function QueryQl() {
 
     this.between = function(data, operator) {
         var jsonQuery = {};
-        jsonQuery[data.what + '|gte'] = data.from;
-        jsonQuery[data.what + '|lte'] = data.to;
-        if ('undefined' == typeof operator) {
+        jsonQuery[data.what + "|gte"] = data.from;
+        jsonQuery[data.what + "|lte"] = data.to;
+        if ("undefined" == typeof operator) {
             this.andFiltering(jsonQuery);
         } else {
-            if (operator == 'or') {
+            if (operator == "or") {
                 this.orFiltering(jsonQuery);
             }
         }

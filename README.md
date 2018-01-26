@@ -41,3 +41,4 @@ Examples
  * [sorting](doc/examples/sorting.md)
  * [store queries](doc/examples/store.md)
  * [wrap combinators](doc/examples/combinators.md)
+ * [date ranges](doc/examples/dates.md)

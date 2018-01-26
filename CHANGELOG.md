@@ -24,3 +24,4 @@
  - store queries with name
  - sort by field name
  - query and sort with single command
+ - query between dates

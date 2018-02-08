@@ -1,6 +1,6 @@
 {
   "name": "queryfilters",
-  "version": "v0.3.16",
+  "version": "v0.3.17",
   "scripts": {
     "test": "jest",
     "lint": "eslint lib"

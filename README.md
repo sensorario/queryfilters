@@ -43,3 +43,4 @@ Examples
  * [sorting](doc/examples/sorting.md)
  * [store queries](doc/examples/store.md)
  * [wrap combinators](doc/examples/combinators.md)
+ * [skip rels](doc/examples/skiprel.md)

@@ -1,6 +1,6 @@
 # Skip rel
 
-Not all relation should be present in querystring. This method provide a
+Not all relations should be present in querystring. This method provide a
 solution to remove relations.
 
 ```javascript

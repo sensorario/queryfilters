@@ -36,6 +36,7 @@ Examples
  * [an example with vue](doc/examples/vue.md)
  * [apply operator more times](doc/examples/operators.md)
  * [date ranges](doc/examples/dates.md)
+ * [period](doc/examples/period.md)
  * [limit](doc/examples/limit.md)
  * [old style queries using aliases](doc/examples/aliases.md)
  * [pure javascript example](doc/examples/javascript.md)

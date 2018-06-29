@@ -1,6 +1,6 @@
 {
   "name": "queryfilters",
-  "version": "v0.3.19",
+  "version": "v0.3.20",
   "scripts": {
     "test": "jest",
     "lint": "eslint lib"
@@ -27,5 +27,8 @@
     "gulp-minify": "^2.1.0",
     "gulp-shell": "^0.6.5",
     "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "giorno": "^1.0.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "queryfilters",
-  "version": "v0.3.20",
+  "version": "v0.3.21",
   "scripts": {
     "test": "jest",
     "lint": "eslint lib"
@@ -17,12 +17,12 @@
   "license": "MIT",
   "repository": "https://github.com/sensorario/queryfilters",
   "devDependencies": {
-    "eslint": "^4.15.0",
-    "eslint-config-standard": "^11.0.0-beta.0",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
     "gulp": "^3.9.1",
     "gulp-minify": "^2.1.0",
     "gulp-shell": "^0.6.5",

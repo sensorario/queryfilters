@@ -23,8 +23,6 @@ test('query data between values', () => {
     date: 'date_to_check',
   });
 
-  console.log(queryQl.getQueryString())
-
   expect(queryQl.getQueryString()).toEqual(
     'filtering[date_to_check|gte]=' + monday
     + '&filtering[date_to_check|lte]=' + sunday

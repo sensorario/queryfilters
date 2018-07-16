@@ -1,4 +1,6 @@
-# Old style queries using aliases
+# Queries using aliases
+
+Instead of use `filtering` it is possible to use `and`.
 
 ```javascript
 var jsonQuery = {
@@ -15,17 +17,6 @@ The query generate following:
 'rel=relation,foo,bar'
 + '&and[_embedded.relation.nick]=@sensorario'
 + '&and[_embedded.foo.bar.name]=Simone'
-```
-
-But it is possible to force old style queries.
-
-```javascript
-var jsonQuery = {
-    'relation.nick': '@sensorario',
-    'foo.bar.name': 'Simone'
-};
-var query = new QueryQl()
-query.and(jsonQuery, {oldStyle:true});
 ```
 
 This configuration will generate the following query.

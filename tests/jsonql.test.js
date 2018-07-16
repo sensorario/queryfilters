@@ -148,3 +148,17 @@ test('allow contains operator with arrays', () => {
         + '&filtering[_embedded.relation.nick|contains|2]=rario'
     );
 });
+
+test.only('force old style directly at init', () => {
+    var jsonQuery = {
+        'relation.nick': '@sensorario',
+        'foo.bar.name': 'Simone'
+    };
+    var queryQl = new QueryQl({oldStyle:true})
+    queryQl.and(jsonQuery);
+    expect(queryQl.getQueryString()).toEqual(
+        'rel=relation,foo,bar'
+        + '&filtering[_embedded.relation.nick]=@sensorario'
+        + '&filtering[_embedded.foo.bar.name]=Simone'
+    );
+});

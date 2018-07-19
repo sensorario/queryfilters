@@ -1,6 +1,6 @@
 How to contribute
 =================
 
- - fork the prject
+ - fork the project
  - apply updates against master branch
  - open a pull request

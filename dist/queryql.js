@@ -462,6 +462,10 @@ function QueryQl(options) {
         this.restrictionConfiguration = restriction;
     };
 
+  this.clear = () => {
+    this.filterManager.reset();
+  };
+
   this.currentWeek = function (date) {
     const monday = giorno.monday();
     let sunday = new Date(monday);

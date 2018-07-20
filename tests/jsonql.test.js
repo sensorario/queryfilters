@@ -149,7 +149,7 @@ test('allow contains operator with arrays', () => {
     );
 });
 
-test.only('force old style directly at init', () => {
+test('force old style directly at init', () => {
     var jsonQuery = {
         'relation.nick': '@sensorario',
         'foo.bar.name': 'Simone'

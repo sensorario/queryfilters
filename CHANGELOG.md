@@ -27,3 +27,4 @@
  - query and sort with single command
  - query between dates
  - convert negative limit to high integer number
+ - force manually reset of filters

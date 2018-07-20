@@ -56,3 +56,13 @@ test('accept limited list of combinator', () => {
 
     expect(catched).toEqual(true);
 });
+
+test('apply filters with default operator', () => {
+  var queryQl = new QueryQl()
+  queryQl.applyFilters([{ field: '_embedded.relation.nick', value: '@sensorario' }, { field: '_embedded.foo.bar.name', value: 'Simone' }]);
+  expect(queryQl.keepDefaultCombinator().getQueryString()).toEqual(
+      'rel=relation,foo,bar'
+      + '&filtering[_embedded.relation.nick]=@sensorario'
+      + '&filtering[_embedded.foo.bar.name]=Simone'
+  );
+});

@@ -1,5 +1,6 @@
 # Version 1.0
 
+ - apply more filters in single step
  - fix module exportation
  - add all relations from each filter
  - change operator combination

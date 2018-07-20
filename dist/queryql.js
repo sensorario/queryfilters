@@ -1,5 +1,7 @@
 "use strict";
 
+const giorno = require('giorno/lib/giorno')
+
 function Combinators() {
     var COMBINATORS_AND = "and";
     var COMBINATORS_DEFAULT = "filtering";
@@ -57,7 +59,12 @@ function QueryStringBuilder() {
         return this;
     };
 
-    this.build = function () {
+    this.setRestrictions = function(restrictions) {
+        this.restrictions = restrictions;
+        return this;
+    };
+
+    this.build = function (opt) {
         var qs = "";
         var rel = "";
         var filterKeys = Object.keys(this.filters);
@@ -108,7 +115,21 @@ function QueryStringBuilder() {
             j = "&";
         }
 
-        return rel + j + qs;
+        var limit = '';
+        if (0 > this.restrictions.limit) {
+            if (rel != "" || qs != "") {
+                limit = '&';
+            }
+
+            limit += 'limit=99999';
+        }
+
+        if (opt != null && opt.skiprel == true) {
+            rel = '';
+            j = j.substring(1, j.length);
+        }
+
+        return rel + j + qs + limit;
     };
 
     this.getFilterIndex = function (filter) {
@@ -169,7 +190,9 @@ function FilterManager() {
     };
 }
 
-function QueryQl() {
+function QueryQl(options) {
+    this.restrictionConfiguration = {};
+
     var relation = 1;
 
     this.setCombinator = function (combinator) {
@@ -193,6 +216,13 @@ function QueryQl() {
         this.filterManager.push(filter);
     };
 
+    this.applyFilters = function (filters) {
+      const filterManager = this.filterManager;
+      filters.forEach( function(filter){
+        filterManager.push(filter);
+      })
+    };
+
     this.getRels = function () {
         this.rel = [];
         for (var f in this.filterManager.getFilters()) {
@@ -205,12 +235,13 @@ function QueryQl() {
         return this.rel;
     };
 
-    this.getQueryString = function () {
+    this.getQueryString = function (opt) {
         return this.builder
             .ensureHaveValidCombinator()
             .setFilters(this.filterManager.getFilters())
             .setSorters(this.sortingManager.getSorters())
-            .build();
+            .setRestrictions(this.restrictionConfiguration)
+            .build(opt);
     };
 
     this.getFilters = function () {
@@ -336,19 +367,29 @@ function QueryQl() {
         return;
     };
 
-    this.and = function (jsonQuery, options) {
-        if ("object" == typeof options) {
-            if (options.oldStyle == true) {
+    this.and = function (jsonQuery, opt) {
+        if ("object" == typeof opt) {
+            if (opt.oldStyle == true) {
                 this.json({
                     "filtering": jsonQuery
                 });
+
                 return;
             }
         }
+      
+      if (typeof options != 'undefined' && options.oldStyle == true) {
+        this.json({
+          "filtering": jsonQuery
+        });
+
+        return;
+      }
 
         this.json({
             "and": jsonQuery
         });
+
         return;
     };
 
@@ -416,6 +457,34 @@ function QueryQl() {
         }
         return this.getQueryString();
     };
+
+    this.restriction = function(restriction) {
+        this.restrictionConfiguration = restriction;
+    };
+
+  this.currentWeek = function (date) {
+    const monday = giorno.monday();
+    let sunday = new Date(monday);
+    sunday.setDate(sunday.getDate() + 6);
+
+    let month = sunday.getMonth() + 1;
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    let day = sunday.getDate();
+    if (day < 10) {
+      day = '0' + day;
+    }
+
+    const to = sunday.getFullYear() + '-' + month + '-' + day;
+
+    return this.between({
+      what: date.date,
+      from: monday,
+      to: to,
+    })
+  };
 }
 
 global.module = global.module || {};

@@ -61,3 +61,15 @@ test('auto prepend _embedded', () => {
         + '&filtering[_embedded.foo.bar.name]=Simone'
     );
 });
+
+test('provide json representation', () => {
+    var queryQl = new QueryQl()
+    queryQl.applyFilter({ field: 'relation.nick', value: '@sensorario' });
+    queryQl.applyFilter({ field: 'foo.bar.name', value: 'Simone' });
+    expect(queryQl.getJson()).toEqual({
+      filtering: [
+        { field: 'relation.nick', value: '@sensorario' },
+        { field: 'foo.bar.name', value: 'Simone' },
+      ]
+    });
+});

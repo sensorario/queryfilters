@@ -73,3 +73,13 @@ test('provide json representation', () => {
       ]
     });
 });
+
+test('provide key value representation', () => {
+    var queryQl = new QueryQl()
+    queryQl.applyFilter({ field: 'relation.nick', value: '@sensorario' });
+    queryQl.applyFilter({ field: 'foo.bar.name', value: 'Simone' });
+    expect(queryQl.getJsonKeyValue()).toEqual([
+        { 'relation.nick': '@sensorario' },
+        { 'foo.bar.name': 'Simone' },
+    ]);
+});

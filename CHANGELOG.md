@@ -28,3 +28,4 @@
  - query between dates
  - convert negative limit to high integer number
  - force manually reset of filters
+ - provide query strings as key value

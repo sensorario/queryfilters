@@ -162,3 +162,23 @@ test('force old style directly at init', () => {
         + '&filtering[_embedded.foo.bar.name]=Simone'
     );
 });
+
+test('filter with or grouping', () => {
+    var jsonQuery = {
+        'or': [{
+            'name|eq': 'Simone',
+            'surname|eq': 'Gentili'
+        },{
+            'role|contains': 'foo',
+            'group|contains': 'bar'
+        }]
+    };
+    var queryQl = new QueryQl()
+    queryQl.json(jsonQuery);
+    expect(queryQl.getQueryString()).toEqual(
+      'filtering_or[name|eq|1]=bar&' +
+      'filtering_or[surname|eq|1]=bar&' +
+      'filtering_or[group|contains|2]=baz&' +
+      'filtering_or[role|contains|2]=baz'
+    );
+});

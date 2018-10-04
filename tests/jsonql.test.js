@@ -175,12 +175,12 @@ test('filter with or grouping', () => {
       }]
     }
   }
-  var queryQl = new QueryQl()
+  var queryQl = new QueryQl({oldStyle:true})
   queryQl.json(jsonQuery);
   expect(queryQl.getQueryString()).toEqual(
-    'or[role|contains|0]=baz&' +
-    'or[group|contains|0]=baz&' +
-    'or[name|eq|1]=Simone&' +
-    'or[surname|eq|1]=Gentili'
+    'filtering_or[role|contains|0]=baz&' +
+    'filtering_or[group|contains|0]=baz&' +
+    'filtering_or[name|eq|1]=Simone&' +
+    'filtering_or[surname|eq|1]=Gentili'
   );
 });

@@ -15,7 +15,7 @@
     }
   }
   
-  var queryQl = new QueryQl({oldStyle:true})
+  var queryQl = new QueryQl({oldStyle:true});
   
   queryQl.json(jsonQuery);
   

@@ -46,3 +46,4 @@ Examples
  * [store queries](doc/examples/store.md)
  * [using aliases](doc/examples/aliases.md)
  * [wrap combinators](doc/examples/combinators.md)
+ * [grouping](doc/examples/grouping.md)
